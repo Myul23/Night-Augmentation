@@ -1,0 +1,15 @@
+.vscode
+__pycache__
+
+# data
+*.zip
+downloads
+augmentation
+result
+
+# model
+model_history
+images
+
+# add
+test*
