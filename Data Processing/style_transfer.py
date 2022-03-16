@@ -39,10 +39,9 @@ for folder in os.listdir(data_path):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         h, s, v = cv2.split(img)
 
-        dst = np.add(255 - v, 80).astype(np.uint8)
-        dst = cv2.subtract(dst, 80)  # 56
+        dst = np.array(v)
         dst = np.exp((dst - np.mean(dst)) / np.std(dst))
-        dst = dst * 80 / np.max(dst.flatten())
+        dst = dst * 150 / np.max(dst.flatten())
 
         img = cv2.merge((h, s, dst.astype(np.uint8)))
         img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
