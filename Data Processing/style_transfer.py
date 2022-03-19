@@ -3,8 +3,8 @@ import numpy as np
 import cv2
 
 
-data_path = "C://images"
-save_path = "augmentation"
+data_path = "C://add_crawling"
+save_path = "images"
 
 if not os.path.exists(data_path):
     print("No data folder")
@@ -36,28 +36,28 @@ for folder in os.listdir(data_path):
         cv2.imwrite(result1, img)
 
         # TODO 만든 데이터 쪽
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        h, s, v = cv2.split(img)
-
-        dst = np.array(v)
-        dst = np.exp((dst - np.mean(dst)) / np.std(dst))
-        dst = dst * 150 / np.max(dst.flatten())
-
-        img = cv2.merge((h, s, dst.astype(np.uint8)))
-        img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
-        cv2.imwrite(result2, img)
-
-        # TODO crawling 쪽
         # img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         # h, s, v = cv2.split(img)
 
-        # dst = np.add(255 - v, 56).astype(np.uint8)
-        # dst = cv2.subtract(dst, 56)
+        # dst = np.array(v)
         # dst = np.exp((dst - np.mean(dst)) / np.std(dst))
         # dst = dst * 150 / np.max(dst.flatten())
-        # dst = np.add(dst, 20)
 
         # img = cv2.merge((h, s, dst.astype(np.uint8)))
-        # img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
+        # img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
         # cv2.imwrite(result2, img)
+
+        # TODO crawling 쪽
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        h, s, v = cv2.split(img)
+
+        dst = np.add(255 - v, 56).astype(np.uint8)
+        dst = cv2.subtract(dst, 56)
+        dst = np.exp((dst - np.mean(dst)) / np.std(dst))
+        dst = dst * 150 / np.max(dst.flatten())
+        dst = np.add(dst, 20)
+
+        img = cv2.merge((h, s, dst.astype(np.uint8)))
+        img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
+        cv2.imwrite(result2, img)
     print(folder, "finished")
