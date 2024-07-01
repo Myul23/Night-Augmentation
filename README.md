@@ -1,4 +1,4 @@
-> ## CycleGAN Augmentation
+> # CycleGAN Augmentation
 
 - 주제: CycleGAN을 이용한 데이터 증강과 이를 통한 자동 분류 시스템 개선
 - 부제: YOLO를 이용한 자동 분류 시스템
